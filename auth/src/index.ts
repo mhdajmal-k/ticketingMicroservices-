@@ -30,6 +30,5 @@ const dbConnect = async () => {
 };
 dbConnect();
 app.listen(3000, () => {
-  console.log("server is running on port 3000");
-  console.log("skaffold testing...");
+  console.log("server successfully  running on port 3000");
 });
