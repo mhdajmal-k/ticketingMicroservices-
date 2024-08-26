@@ -1,0 +1,61 @@
+# apiVersion: skaffold/v2alpha3
+# kind: Config
+# deploy:
+#   kubectl:
+#     manifests:
+#       - ./infra/k8s/*
+# build:
+#   local:
+#     push: false
+#   artifacts:
+#     - image: mhdajmal/auth
+#       context: auth
+#       docker:
+#         dockerfile: Dockerfile
+#       sync:
+#         manual:
+#           - src: "src/**/*.ts"
+#             dest: .
+#     - image: mhdajmal/tickets
+#       context: tickets
+#       docker:
+#         dockerfile: Dockerfile
+#       sync:
+#         manual:
+#           - src: "src/**/*.ts"
+#             dest: .
+
+apiVersion: skaffold/v2alpha3
+kind: Config
+build:
+  local:
+    push: false
+  artifacts:
+    - image: mhdajmal/auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+    - image: mhdajmal/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+    - image: mhdajmal/orders
+      context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
